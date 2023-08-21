@@ -1,24 +1,25 @@
-//スライドショー作成用の「Swiper」の使い方
-//ここでのSwiperはjQuery不要のJavaScriptのプラグインになる。
-//プラグインをインターネットで検索するとたくさん出てきて、jQueryのプラグインもたくさん出てきますが、jQueryのプラグインはjQueryが導入されていることが前提となります。
+//jQueryで「マウスクリック」イベントを設定する
 
-
-//「Swiper」でスライドショーを作成する
-//Swiperの導入方法はいくつか存在しますが、今回は手軽に導入ができるCDNによる実装とします
-//CDN（コンテンツデリバリーネットワーク）による導入とは、ウェブコンテンツ（ファイルなど）をインターネット経由で読み込みます
-
-const swiper = new Swiper('.swiper', {
-  //オプションの設定
-  loop: true, //最後までスライドしたら最初の画像に戻る
-
-  //ページネーション表示の設定
-  pagination: {
-    el: '.swiper-pagination', //ページネーションの要素
-  },
-
-  //ナビゲーションボタン（矢印）表示の設定
-  navigation: {
-    nextEl: '.swiper-button-next', //「次へボタン」要素の指定
-    prevEl: '.swiper-button-prev', //「前へボタン」要素の指定
-  }
+$(function() {
+  $('#back a').on('click',function(event){ //eventという名でなくても構いません。function(e)と、されることも多い
+    // #back内のaタグがクリックされたときの処理
+    $('body, html').animate({
+      //animate() は、アニメーション効果を設定するjQueryの関数
+      scrollTop:0
+      //scrollTop は、スクロール位置を取得できるメソッド
+      //「scrollTop:0」を指定しているので、「最上部に移動する」
+    }, 800);
+    //800ミリ秒間（0.8秒間）かけてページの最上部まで移動する
+    event.preventDefault();
+    //event.preventDefault(); は、aタグの機能を無効にするメソッド
+  });
 });
+
+//ページ全体に対して処理を実行したいので、セレクタには、$('body, html')が設定されている。
+//「body要素またはhtml要素」の意味になる。
+
+
+//「スクロールイベント」の記述例
+//$('セレクタ名').animate({
+//  変化対象のプロパティ名:変化値
+//}, アニメーションの動作時間);
